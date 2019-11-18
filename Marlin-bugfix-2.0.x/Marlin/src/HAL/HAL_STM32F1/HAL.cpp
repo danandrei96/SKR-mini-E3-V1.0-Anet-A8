@@ -161,10 +161,10 @@ enum TEMP_PINS : char {
     TEMP_5,
   #endif
   #if ENABLED(FILAMENT_WIDTH_SENSOR)
-    FILWIDTH,
-  #endif
   #if ENABLED(ADC_KEYPAD)
     ADC_KEY,
+  #endif
+    FILWIDTH,
   #endif
   #if HAS_JOY_ADC_X
     JOY_X,
@@ -175,7 +175,6 @@ enum TEMP_PINS : char {
   #if HAS_JOY_ADC_Z
     JOY_Z,
   #endif
-  
   ADC_PIN_COUNT
 };
 
@@ -279,7 +278,7 @@ extern "C" {
 // return free memory between end of heap (or end bss) and whatever is current
 
 /*
-#include "wirish/syscalls.c"
+#include <wirish/syscalls.c>
 //extern caddr_t _sbrk(int incr);
 #ifndef CONFIG_HEAP_END
 extern char _lm_heap_end;

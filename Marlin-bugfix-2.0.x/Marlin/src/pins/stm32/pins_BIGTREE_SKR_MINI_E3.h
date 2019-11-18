@@ -33,22 +33,16 @@
 // Ignore temp readings during development.
 //#define BOGUS_TEMPERATURE_GRACE_PERIOD 2000
 
-#ifdef MCU_STM32F103RE
-  #define STM32_FLASH_SIZE (512 * 1024)
-#else
-  #define STM32_FLASH_SIZE (256 * 1024)
-#endif
-
 #define FLASH_EEPROM_EMULATION
 #define EEPROM_PAGE_SIZE     uint16(0x800) // 2KB
-#define EEPROM_START_ADDRESS uint32(0x8000000 + STM32_FLASH_SIZE - 2 * EEPROM_PAGE_SIZE)
+#define EEPROM_START_ADDRESS uint32(0x8000000 + (STM32_FLASH_SIZE) * 1024 - 2 * EEPROM_PAGE_SIZE)
 #undef E2END
 #define E2END                (EEPROM_PAGE_SIZE - 1) // 2KB
 
 //
 // Servos
 //
-//#define SERVO0_PIN         PA1
+#define SERVO0_PIN         PA1
 
 //
 // Limit Switches
@@ -145,14 +139,15 @@
     #define LCD_PINS_D4    PB9
   #endif //CR10 LCD
 
-  #if ENABLED(ZONESTAR_LCD)
+  #if ENABLED(ZONESTAR_LCD) //ANET A8 LCD CONTROLLER - MUST CONVERT TO 3.3V
     #define LCD_PINS_RS    PB9
     #define LCD_PINS_ENABLE    PB6
     #define LCD_PINS_D4    PB8
     #define LCD_PINS_D5    PA10
     #define LCD_PINS_D6    PA9
     #define LCD_PINS_D7    PB5
-    #define ADC_KEYPAD_PIN    PA1 //REPURPOSE SERVO PIN FOR ADC
+    #define ADC_KEYPAD_PIN    PA1 //REPURPOSE SERVO PIN FOR ADC 
+
   #endif //Zonestar LCD
 
   #else
